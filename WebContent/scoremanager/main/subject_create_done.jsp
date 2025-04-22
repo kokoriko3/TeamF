@@ -16,6 +16,7 @@
 				<div class="col-3">
 					<a class="col-auto m-4" href="SubjectCreate.action">戻る</a>
 					<a class="col-auto" href="SubjectList.action">科目一覧</a>
+
 			</div>
 			</div>
 		</section>
