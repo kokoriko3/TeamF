@@ -24,6 +24,7 @@ public class SubjectListAction extends Action {
 
 		 List<Subject> subjects = subjectDao.filter(teacher.getSchool());
 
+		 System.out.println(subjects);
 		 request.setAttribute("subjects", subjects);
 
 		 request.getRequestDispatcher("subject_list.jsp").forward(request, response);
