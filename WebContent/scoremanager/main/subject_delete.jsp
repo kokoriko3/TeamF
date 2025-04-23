@@ -11,12 +11,12 @@
 
 
             <p class="text-danger px-4">
-                「${subject.getName()}（${subject.getCode()}）」を削除してよろしいですか？
+                「${subject.getName()}（${subject.getCd()}）」を削除してよろしいですか？
             </p>
 
             <!-- 削除フォーム -->
             <form method="post" action="SubjectDeleteExecute.action" class="px-4">
-                <input type="hidden" name="code" value="${subject.getCode()}">
+                <input type="hidden" name="code" value="${subject.getCd()}">
 
                 <!-- ③ 削除ボタン -->
                 <button type="submit" class="btn btn-danger me-3">削除</button>

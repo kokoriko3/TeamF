@@ -31,7 +31,7 @@ public class SubjectUpdateAction extends Action {
 
         // パラメータから科目コード取得
 
-        String cd = req.getParameter("cd");
+        String cd = req.getParameter("no");
 
         // 科目情報を取得（cd, school を使う）
 
