@@ -12,7 +12,6 @@
             <p class="text-danger px-4">
                 「${test.getName()}（${test.getId()}）」を削除してよろしいですか？
             </p>
-
             <!-- 削除フォーム -->
             <form method="post" action="TestDeleteExecute.action" class="px-4">
                 <input type="hidden" name="id" value="${test.getId()}">
