@@ -5,7 +5,6 @@
 	<c:param name="title">
         得点管理システム
     </c:param>
-
 	<c:param name="content">
 		<section class="me-4">
 			<div class="row mx-5 mb-1 align-items-center" id="filter">
