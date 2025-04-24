@@ -25,7 +25,6 @@ public class SubjectCreateExecuteAction extends Action {
 		System.out.println(no);
 		System.out.println(name);
 
-
 		SubjectDao subDao = new SubjectDao();
 
 		if (no.length() != 3) {
