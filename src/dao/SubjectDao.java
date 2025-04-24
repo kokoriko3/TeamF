@@ -87,6 +87,7 @@ public class SubjectDao extends Dao{
 				// 科目インスタンスに検索結果をセット
 				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
+				subject.setSchool(school);
 				// リストに追加
 				list.add(subject);
 			}
