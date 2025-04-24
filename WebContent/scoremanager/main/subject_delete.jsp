@@ -11,7 +11,7 @@
 
 
             <p class="text-danger px-4">
-                「${subject.getName()}（${subject.getcd()}）」を削除してよろしいですか？
+                「${subject.getName()}（${subject.getCd()}）」を削除してよろしいですか？
             </p>
 
             <!-- 削除フォーム -->
