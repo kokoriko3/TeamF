@@ -13,34 +13,22 @@
 			<div class="my-2 text-end px-4">
 				<a href="SubjectCreate.action">新規登録</a>
 			</div>
+				<table class="table table-hover">
+					<tr>
+						<th>科目コード</th>
+						<th>科目名</th>
+					</tr>
+					<c:forEach var="subject" items="${subjects }">
+					<tr>
 
-			<c:choose>
-				<c:when test="${subject.size()>0 }">
-					<div>検索結果:${subject.size() }件</div>
-					<table class="table table-hover">
-						<tr>
-							<th>科目コード</th>
-							<th>科目名</th>
-							<th></th>
-							<th></th>
-						</tr>
-						<c:forEach var="subject" items="${subject }">
-						<tr>
-
-							<%-- subjectdao完成後に作る --%>
-							<td>${subject.entYear }</td>
-							<td>${subject.no }</td>
-							<td>${subject.name }</td>
-							<td>${subject.classNum }</td>
-							<td><a href="SubjectUpdate.action?no=${subject.no }">変更</a></td>
-						</tr>
-						</c:forEach>
-					</table>
-				</c:when>
-				<c:otherwise>
-					<div>       </div>
-				</c:otherwise>
-			</c:choose>
+						<%-- subjectdao完成後に作る --%>
+						<td>${subject.cd }</td>
+						<td>${subject.name }</td>
+						<td><a href="SubjectUpdate.action?no=${subject.cd }">変更</a></td>
+						<td><a href="SubjectDelete.action?no=${subject.cd }">削除</a></td>
+					</tr>
+					</c:forEach>
+				</table>
 		</section>
 	</c:param>
 
