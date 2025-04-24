@@ -31,7 +31,7 @@
 				<h2
 					class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">ログイン</h2>
 				<form method="post" action="LoginExecute.action">
-				<p class="mb-2 mx-auto">${message}</p>>
+				<p class="mb-2 mx-auto">${message}</p>
 					<div class="form-floating mb-2 mx-4">
 						<input type="text" class="form-control" id="floatingInputId"
 							value="admin1" name="id" maxlength="30" required> <label
