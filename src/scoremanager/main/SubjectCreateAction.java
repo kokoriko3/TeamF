@@ -9,6 +9,7 @@ public class SubjectCreateAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
+
 	req.getRequestDispatcher("subject_create.jsp").forward(req, res);
 	}
 }
