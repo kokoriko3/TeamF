@@ -28,11 +28,5 @@ public class SubjectDeleteAction extends Action {
         // 科目情報をリクエストに渡して、確認画面へ
         request.setAttribute("subject", subject);
         request.getRequestDispatcher("/scoremanager/main/subject_delete.jsp").forward(request, response);
-
-        System.out.println("cd: " + cd);
-        System.out.println("teacher school cd: " + teacher.getSchool().getCd());
-        System.out.println("subject: " + subject);
-        System.out.println("subject name: " + (subject != null ? subject.getName() : "null"));
-
     }
 }
