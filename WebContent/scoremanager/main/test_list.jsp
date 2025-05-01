@@ -13,7 +13,7 @@
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
 			<div class="container border mx-3 mb-3 py-2 align-items-center rounded">
-			<form method="get" action="TestListActionExcute.aciton">
+			<form method="get" action="TestListSubjectExecute.aciton">
 				<div class="row border-bottom" id="filter">
 					<div class="col-2 text-center p-4">
 						<p>科目情報</p>
@@ -51,7 +51,7 @@
 					<div class="mt-2 text-warning">${errors.get("f1") }</div>
 				</div>
 			</form>
-			<form method="get">
+			<form method="get" action="TestListStudentExecute.aciton">
 				<div class="row ">
 					<div class="col-2 text-center p-4">
 						<p>学生情報</p>
