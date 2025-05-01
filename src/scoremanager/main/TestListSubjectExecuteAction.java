@@ -17,9 +17,11 @@ public class TestListSubjectExecuteAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
+		// ログイン中の教員の情報を取得
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
+		// 入力された「f1」「f2」「f3」を取得
 		String entYearStr = "";
 		String classNum = "";
 		int entYear = 0;
@@ -29,8 +31,10 @@ public class TestListSubjectExecuteAction extends Action {
 		classNum = req.getParameter("f2");
 		subject = req.getParameter("f3");
 
+		// 入力エラーを保持するMap
 		Map<String, String> errors = new HashMap<>();
 
+		// 必要な項目が未入力だったら「errors」をセットして「test_list.jsp」にフォワード
 		if (entYearStr == null || entYearStr.equals("0") ||
 			    classNum == null || classNum.equals("0") ||
 			    subject == null || subject.equals("0")) {
@@ -40,14 +44,18 @@ public class TestListSubjectExecuteAction extends Action {
             return;
 		}
 
+		// 「TestListSubjectDao」を生成
 		TestListSubjectDao tesListSubDao = new TestListSubjectDao();
 
+		// 「etnYearStr」(文字列)を数値に変換
 		entYear = Integer.parseInt(entYearStr);
 
-
+		// 指定した条件で生徒とその成績を取得
+		// 取得したデータをセット
 		List<TestListSubject> tesListSub = tesListSubDao.filter(teacher.getSchool(), entYear, classNum);
 		req.setAttribute("students", tesListSub);
 
+		// 「test_list_subject.jsp」にフォワード
 		req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 	}
 }
