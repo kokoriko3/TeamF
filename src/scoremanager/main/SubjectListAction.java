@@ -17,16 +17,22 @@ public class SubjectListAction extends Action {
 			HttpServletRequest request, HttpServletResponse response
 		)throws Exception {
 
+		// ログイン中の教員の情報を取得
 		HttpSession session = request.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
+		// 「SubjectDao」を生成
 		SubjectDao subjectDao = new SubjectDao();
 
-		 List<Subject> subjects = subjectDao.filter(teacher.getSchool());
+		// 教員が所属する学校の科目を取得
+		List<Subject> subjects = subjectDao.filter(teacher.getSchool());
 
-		 System.out.println(subjects);
-		 request.setAttribute("subjects", subjects);
+		System.out.println(subjects);
 
-		 request.getRequestDispatcher("subject_list.jsp").forward(request, response);
+		// JSPに渡すためにセット
+		request.setAttribute("subjects", subjects);
+
+		// 「subject_list.jsp」にフォワード
+		request.getRequestDispatcher("subject_list.jsp").forward(request, response);
 	}
 }

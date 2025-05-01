@@ -2,7 +2,9 @@ package scoremanager.main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,12 +29,15 @@ public class TestRegistAction extends Action{
 		ClassNumDao cNumDao = new ClassNumDao(); //クラス番号Dao
 		SubjectDao sDao = new SubjectDao(); // 科目dao
 		TestDao tDao = new TestDao(); // 得点dao
+		List<Test> tList = new ArrayList<>();
 		LocalDate todayDate = LocalDate.now(); //LocalDateインスタンスを取得
 		int year = todayDate.getYear(); // 現在の年を取得
 		String entYearStr = "";
 		String classNum = "";
 		String subjectCd = "";
 		String numStr = "";
+		int entYear = 0;
+		Map<String, String>errors = new HashMap<>(); // エラーメッセージ
 
 		// 値を受け取る
 		entYearStr = req.getParameter("f1");
@@ -40,13 +45,24 @@ public class TestRegistAction extends Action{
 		subjectCd = req.getParameter("f3");
 		numStr = req.getParameter("f4");
 
+		// 絞り込み用
+		if (entYearStr != null) {
+			/// 数値に変換
+			entYear = Integer.parseInt(entYearStr);
+		}
 		// DBからデータを取得
-		// subjectの情報を受け取る
-		Subject subject = sDao.get(subjectCd, teacher.getSchool());
-		// 一覧表示に使うデータ
-		List<Test> tList = tDao.filter(
-				Integer.parseInt(entYearStr), classNum,  subject,
-				Integer.parseInt(numStr), teacher.getSchool());
+		if (subjectCd != null && entYearStr != null && classNum != null && numStr != null) {
+			// subjectの情報を受け取る
+			Subject subject = sDao.get(subjectCd, teacher.getSchool());
+			// 一覧表示に使うデータ
+			tList = tDao.filter(
+					entYear,classNum,  subject,
+					Integer.parseInt(numStr), teacher.getSchool());
+			req.setAttribute("f3", subject);
+		} else {
+			errors.put("f1","入学年度とクラスと科目と回数のすべてを入力してください");
+			req.setAttribute("errors", errors);
+		}
 		// セレクトボックスに使うデータ
 		// ログインユーザの学校コードをもとにクラス番号の一覧を取得
 		List<String> classList = cNumDao.filter(teacher.getSchool());
@@ -60,12 +76,19 @@ public class TestRegistAction extends Action{
 			entYearSet.add(i);
 		}
 		// リクエストを設定
-		req.setAttribute("f1", entYearSet);
-		req.setAttribute("f2", classList);
-		req.setAttribute("f3", subjectList);
+		req.setAttribute("ent_year_set", entYearSet);
+		req.setAttribute("class_num_set", classList);
+		req.setAttribute("subject_set", subjectList);
 
+		req.setAttribute("f1", entYear);
+		req.setAttribute("f2", classNum);
+		req.setAttribute("f4", numStr);
+
+		for (Test t : tList) {
+			System.out.println("点数:"+t.getPoint());
+		}
 		req.setAttribute("list", tList);
 
-		req.getRequestDispatcher("test_regist.jsp").forward(req,res);;
+		req.getRequestDispatcher("test_regist.jsp").forward(req,res);
 	}
 }

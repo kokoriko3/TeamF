@@ -79,18 +79,19 @@ public class TestDao extends Dao{
 				// 得点インスタンス
 				Test test = new Test();
 				Student student = new Student();
-				student.setNo(rSet.getString("student_num"));
+				student.setNo(rSet.getString("student_no"));
 				test.setStudent(student);
 				test.setPoint(rSet.getInt("point"));
 				// リストに追加
 				list.add(test);
+
 			}
 		} catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
 		}
 		return list;
 }
-	public List<Test> filter(int entYear,Subject subject,int num,School school) throws Exception {
+	public List<Test> filter(int entYear,String classNum ,Subject subject,int num,School school) throws Exception {
 		// コネクションを確率
 		Connection connection = getConnection();
 		// プリペアードステートメント
@@ -107,25 +108,27 @@ public class TestDao extends Dao{
 			statement = connection.prepareStatement(baseSql
 					+"join student on test.student_no = student.no "
 					+ "where ent_year = ? and subject_cd = ? "
-					+ "and num = ? and school_cd = ?");
+					+ "and test.no = ? and test.school_cd = ? and test.class_num = ?");
 			// プリペアードステートメントにバインド
 			statement.setInt(1,entYear);
 			statement.setString(2, subject.getCd());
 			statement.setInt(3, num);
 			statement.setString(4, school.getCd());
+			statement.setString(5, classNum);
 			// プリペアードステートメントをじっこう
 			rSet = statement.executeQuery();
 			// リストへの格納処理を実行
 			tListDB = postFilter(rSet, school);
 			// 入学年度が同じ学生を絞り込み
 			List<Student> sList = new ArrayList<>();
-			// sDaoから入学年度と学校がおなじものを絞り込み
+			// studentのデータベースからクラスと入学年度が一緒の学生を検索
 			StudentDao sDao = new StudentDao();
-			sList = sDao.filter(school, entYear, true);
+			sList = sDao.filter(school, entYear,classNum, true);
 
 
 			// sListで絞り込んだデータと学生番号が同じデータがある場合そのデータに得点を格納
 			for (Student student : sList) {
+				System.out.println(student.getNo());
 				// テストインスタンスを初期化
 				Test test = new Test();
 				test.setClassNum(student.getClassNum());
@@ -133,9 +136,14 @@ public class TestDao extends Dao{
 				test.setSchhool(school);
 				test.setStudent(student);
 				test.setSubject(subject);
+				// クラスの生徒のデータとテストテールの学生番号が同じ場所があれば点数を定義
 				for (Test t : tListDB) {
+					System.out.println("テストの学生番号:"+t.getStudent().getNo()+"クラスの学生番号:"+student.getNo());
 					if(t.getStudent().getNo().equals(student.getNo())){
 						test.setPoint(t.getPoint());
+						break;
+					} else {
+						test.setPoint(-1);
 					}
 				}
 				// リストに追加
