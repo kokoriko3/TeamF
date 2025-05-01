@@ -1,17 +1,15 @@
 package scoremanager.main;
 
-<<<<<<< HEAD
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Teacher;
 import bean.TestListSubject;
-import dao.ClassNumDao;
-import dao.SchoolDao;
 import dao.TestListSubjectDao;
 import tool.Action;
 
@@ -60,5 +58,4 @@ public class TestListSubjectExecuteAction extends Action {
 		// 「test_list_subject.jsp」にフォワード
 		req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 	}
->>>>>>> branch 'master' of https://github.com/kokoriko3/TeamF.git
 }
