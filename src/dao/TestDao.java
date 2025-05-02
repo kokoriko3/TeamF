@@ -136,14 +136,13 @@ public class TestDao extends Dao{
 				test.setSchhool(school);
 				test.setStudent(student);
 				test.setSubject(subject);
+				test.setPoint(-1);
 				// クラスの生徒のデータとテストテールの学生番号が同じ場所があれば点数を定義
 				for (Test t : tListDB) {
 					System.out.println("テストの学生番号:"+t.getStudent().getNo()+"クラスの学生番号:"+student.getNo());
 					if(t.getStudent().getNo().equals(student.getNo())){
 						test.setPoint(t.getPoint());
 						break;
-					} else {
-						test.setPoint(-1);
 					}
 				}
 				// リストに追加
@@ -178,9 +177,10 @@ public class TestDao extends Dao{
 		for (Test test : list){
 			// コネクションを確率
 			Connection connection = getConnection();
-
-			boolean isSuccese = save(test,connection);
-
+			boolean isSuccese = true;
+			if (test.getPoint() != -1) {
+				isSuccese = save(test,connection);
+			}
 			// コネクションを閉じる
 			if (connection != null) {
 				try {

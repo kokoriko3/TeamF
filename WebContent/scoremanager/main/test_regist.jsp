@@ -89,14 +89,16 @@
 							<tbody>
 								<c:forEach var="test" items="${list}" varStatus="status">
 									<tr>
-										<td>${f1}</td>
+										<td>${test.getStudent().getEntYear()}</td>
 										<td>${test.classNum}</td>
 										<td>${test.getStudent().getNo()}</td>
 										<td>${test.getStudent().getName()}</td>
 										<td>
+
 											<input type="number"
 											name="testList[${status.index}].point" class="form-control"
-											<c:if  test="${test.point != -1}">value ="${test.point }"</c:if> />
+											<c:if  test="${test.point >= 0 }">value ="${test.point }"</c:if> />
+											<c:if test="${test.point  == -2}"><label class="input-label mt-2 text-warning" >0 ~ 100の範囲で入力してください</label></c:if>
 											<input type="hidden" name="testList[${status.index}].student" value="${test.getStudent().getNo()}" />
 											<input type="hidden" name="testList[${status.index}].classNum" value="${test.classNum}" />
 											<input type="hidden" name="testList[${status.index}].subject"value="${test.getSubject().getCd()}" />
