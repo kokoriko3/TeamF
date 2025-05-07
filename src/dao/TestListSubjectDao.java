@@ -64,4 +64,22 @@ public class TestListSubjectDao extends Dao {
 
         return list;
     }
+
+    public List<Integer> getEntYearList(School school) throws Exception {
+        List<Integer> list = new ArrayList<>();
+        String sql = "SELECT DISTINCT ent_year FROM student WHERE school_cd = ? ORDER BY ent_year ASC";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, school.getCd());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                list.add(rs.getInt("ent_year"));
+            }
+        }
+        return list;
+    }
+
 }
