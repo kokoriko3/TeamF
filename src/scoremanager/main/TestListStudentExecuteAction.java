@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.School;
+import bean.Student;
 import bean.Teacher;
-import bean.TestListSubject;
+import bean.TestListStudent;
 import dao.ClassNumDao;
 import dao.SchoolDao;
+import dao.StudentDao;
+import dao.TestListStudentDao;
 import dao.TestListSubjectDao;
 import tool.Action;
 
@@ -26,16 +29,14 @@ public class TestListStudentExecuteAction extends Action {
         Teacher teacher = (Teacher) session.getAttribute("user");
 
         // 入力値取得
-        String entYearStr = req.getParameter("f1");
-        String classNum = req.getParameter("f2");
+        String studentNo = req.getParameter("no");
 
         // 入力値の検証と変換
         Map<String, String> errors = new HashMap<>();
-        int entYear = 0;
+        int no = 0;
 
-        if (entYearStr == null || entYearStr.equals("0") ||
-            classNum == null || classNum.equals("0")) {
-            errors.put("f1", "入学年度とクラスを選択してください。");
+        if (studentNo == null || studentNo.equals("0")) {
+            errors.put("f1", "学生番号を選択してください。");
 
             // セレクトボックス用データ再取得
             SchoolDao schoolDao = new SchoolDao();
@@ -48,8 +49,7 @@ public class TestListStudentExecuteAction extends Action {
             req.setAttribute("ent_year_set", testDao.getEntYearList(school));
 
             // 入力値保持
-            req.setAttribute("f1", entYearStr);
-            req.setAttribute("f2", classNum);
+            req.setAttribute("no", studentNo);
             req.setAttribute("errors", errors);
 
             // エラー時の画面に戻る
@@ -57,23 +57,22 @@ public class TestListStudentExecuteAction extends Action {
             return;
         }
 
-        // 正常処理：学校情報取得
-        SchoolDao schoolDao = new SchoolDao();
-        School school = schoolDao.get(teacher.getSchool().getCd());
-        entYear = Integer.parseInt(entYearStr);
+        // 学生情報取得
+        StudentDao sDao = new StudentDao();
+        Student student = sDao.get(studentNo);
 
         // 成績データ取得
-        TestListSubjectDao testDao = new TestListSubjectDao();
-        List<TestListSubject> testList = testDao.filter(school, entYear, classNum);
+        TestListStudentDao testDao = new TestListStudentDao();
+        List<TestListStudent> testList = testDao.filter(student);
 
         // セレクトボックス表示用
-        ClassNumDao classNumDao = new ClassNumDao();
-        req.setAttribute("class_num_set", classNumDao.filter(school));
-        req.setAttribute("ent_year_set", testDao.getEntYearList(school));
+        ClassNumDao cNumDao = new ClassNumDao();
+		List<String> classea = cNumDao.filter(teacher.getSchool());
+		
+		req.setAttribute("ent_year_set", entYears);
+		req.setAttribute("class_num_set", classea);
 
         // 入力値保持
-        req.setAttribute("f1", entYearStr);
-        req.setAttribute("f2", classNum);
         req.setAttribute("students", testList);
 
         // 表示JSPへ遷移
