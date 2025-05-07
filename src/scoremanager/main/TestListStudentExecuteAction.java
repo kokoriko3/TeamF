@@ -1,6 +1,8 @@
 package scoremanager.main;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,40 +19,64 @@ import tool.Action;
 public class TestListStudentExecuteAction extends Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-        HttpSession session = request.getSession();
+        // ログイン中の教員情報を取得
+        HttpSession session = req.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 
-        String schoolCd = teacher.getSchool().getCd();
+        // 入力値取得
+        String entYearStr = req.getParameter("f1");
+        String classNum = req.getParameter("f2");
+
+        // 入力値の検証と変換
+        Map<String, String> errors = new HashMap<>();
+        int entYear = 0;
+
+        if (entYearStr == null || entYearStr.equals("0") ||
+            classNum == null || classNum.equals("0")) {
+            errors.put("f1", "入学年度とクラスを選択してください。");
+
+            // セレクトボックス用データ再取得
+            SchoolDao schoolDao = new SchoolDao();
+            School school = schoolDao.get(teacher.getSchool().getCd());
+
+            ClassNumDao classNumDao = new ClassNumDao();
+            req.setAttribute("class_num_set", classNumDao.filter(school));
+
+            TestListSubjectDao testDao = new TestListSubjectDao();
+            req.setAttribute("ent_year_set", testDao.getEntYearList(school));
+
+            // 入力値保持
+            req.setAttribute("f1", entYearStr);
+            req.setAttribute("f2", classNum);
+            req.setAttribute("errors", errors);
+
+            // エラー時の画面に戻る
+            req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+            return;
+        }
+
+        // 正常処理：学校情報取得
         SchoolDao schoolDao = new SchoolDao();
-        School school = schoolDao.get(schoolCd);
+        School school = schoolDao.get(teacher.getSchool().getCd());
+        entYear = Integer.parseInt(entYearStr);
 
-        String entYearStr = request.getParameter("f1");
-        String classNum = request.getParameter("f2");
-
-        Integer entYear = null;
-        if (entYearStr != null && !entYearStr.equals("0")) {
-            entYear = Integer.parseInt(entYearStr);
-        }
-
-        ClassNumDao classDao = new ClassNumDao();
-        List<String> classNumSet = classDao.filter(school);
-        request.setAttribute("class_num_set", classNumSet);
-
+        // 成績データ取得
         TestListSubjectDao testDao = new TestListSubjectDao();
-        List<Integer> entYearSet = testDao.getEntYearList(school);
-        request.setAttribute("ent_year_set", entYearSet);
+        List<TestListSubject> testList = testDao.filter(school, entYear, classNum);
 
-        List<TestListSubject> results = null;
-        if (entYear != null && classNum != null && !classNum.equals("0")) {
-            results = testDao.filter(school, entYear, classNum);
-        }
+        // セレクトボックス表示用
+        ClassNumDao classNumDao = new ClassNumDao();
+        req.setAttribute("class_num_set", classNumDao.filter(school));
+        req.setAttribute("ent_year_set", testDao.getEntYearList(school));
 
-        request.setAttribute("f1", entYearStr);
-        request.setAttribute("f2", classNum);
-        request.setAttribute("test_list_subjects", results);
+        // 入力値保持
+        req.setAttribute("f1", entYearStr);
+        req.setAttribute("f2", classNum);
+        req.setAttribute("students", testList);
 
-        request.getRequestDispatcher("/scoremanager/main/student_test_list.jsp").forward(request, response);
+        // 表示JSPへ遷移
+        req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
     }
 }
