@@ -12,7 +12,7 @@
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報登録</h2>
 			<form method="post" action="StudentCreateExecute.action">
-					<div class="mb-2 mx-2">
+					<div class="mb-1">
 						<label class="form-label" for="entyear-select">入学年度</label>
 						<select class="form-select" id="entyear-select" name="ent_year">
 							<option value="0">--------</option>
@@ -22,18 +22,18 @@
 						</select>
 						<label class="form-label text-warning" for="entyear-select">${errorEntYear}</label>
 					</div>
-					<div class="mb-2 mx-2">
+					<div class="mb-1">
 						<label class="form-label" for="student-f2-select">学生番号</label>
 						<input type="text"  class="form-control" maxlength="10" required
 						name="no" placeholder="学生番号を入力してください" value="${no}">
 						<label class="form-label text-warning" for="entyear-select">${errorNo}</label>
 					</div>
-					<div class="mb-2 mx-2">
+					<div class="mb-1">
 						<label class="form-label" for="student-f2-select">氏名</label>
 						<input type="text"  class="form-control" maxlength="30" required
 						name="name" placeholder="氏名を入力してください" value="${name}">
 					</div>
-					<div class="mb-4 mx-2">
+					<div class="mb-3">
 						<label class="form-label" for="student-f2-select">クラス</label>
 						<select class="form-select" id="student-f2-select" name="class_num">
 							<c:forEach var="num" items="${class_num_set }">
@@ -41,7 +41,7 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-2 mb-4 text-center">
+					<div class="my-3">
 						<button type="submit" class="btn btn-secondary" id="filter-button">登録して終了</button>
 					</div>
 					<a href="StudentList.action">戻る</a>

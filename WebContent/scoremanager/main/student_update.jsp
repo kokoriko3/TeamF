@@ -37,13 +37,13 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="mb-2 col-2 form-check text-center">
+					<div class="my-3 col-2 form-check ">
 						<label class="form-check-label" for="student-f3-check">在学中
 							<input class="form-check-input" type="checkbox" id="student-f3-check" name="isAttend" value="t"
 							<c:if test="${student.isAttend()}">checked</c:if>/>
 						</label>
 					</div>
-					<div class="col-2 mb-4 text-center">
+					<div class="col-2 mb-4 ">
 						<button type="submit" class="btn btn-primary" id="filter-button">変更</button>
 					</div>
 					<a href="StudentList.action">戻る</a>

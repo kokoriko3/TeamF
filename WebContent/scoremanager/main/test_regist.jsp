@@ -76,7 +76,7 @@
 					<form method="post" action="TestRegistExecute.action">
 					<input type="hidden" name="count" value="${ list.size()}" />
 						<p class="ps-3">科目:${f3.name} (${f4 }回)</p>
-						<table class="table table-bordered">
+						<table class="table table-hover">
 							<thead>
 								<tr>
 									<th>入学年度</th>

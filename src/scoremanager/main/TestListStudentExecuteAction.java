@@ -1,5 +1,7 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,8 +70,16 @@ public class TestListStudentExecuteAction extends Action {
         // セレクトボックス表示用
         ClassNumDao cNumDao = new ClassNumDao();
 		List<String> classea = cNumDao.filter(teacher.getSchool());
-		
-		req.setAttribute("ent_year_set", entYears);
+
+		LocalDate todayDate = LocalDate.now(); //LocalDateインスタンスを取得
+		int year = todayDate.getYear(); // 現在の年を取得
+		// リストを初期化
+		List<Integer> entYearSet = new ArrayList<>();
+		// 10年前から1年後mでリストに追加
+		for (int i = year - 10;i < year + 1; i ++){
+			entYearSet.add(i);
+		}
+		req.setAttribute("ent_year_set", entYearSet);
 		req.setAttribute("class_num_set", classea);
 
         // 入力値保持

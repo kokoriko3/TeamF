@@ -50,8 +50,14 @@ public class TestRegistAction extends Action{
 			/// 数値に変換
 			entYear = Integer.parseInt(entYearStr);
 		}
+		System.out.println("entyear:"+entYearStr+"classnum:"+classNum+"subjectcd:"+subjectCd+"numstr:"+numStr);
 		// DBからデータを取得
-		if (subjectCd != null && entYearStr != null && classNum != null && numStr != null) {
+		if (subjectCd == null && entYearStr == null && classNum == null && numStr == null) {
+			// スルー処理
+		} else if(subjectCd.equals("0") || entYearStr.equals("0") || classNum.equals("0") || numStr.equals("0")){
+			errors.put("f1","入学年度とクラスと科目と回数のすべてを入力してください");
+			req.setAttribute("errors", errors);
+		}else {
 			// subjectの情報を受け取る
 			Subject subject = sDao.get(subjectCd, teacher.getSchool());
 			// 一覧表示に使うデータ
@@ -59,9 +65,6 @@ public class TestRegistAction extends Action{
 					entYear,classNum,  subject,
 					Integer.parseInt(numStr), teacher.getSchool());
 			req.setAttribute("f3", subject);
-		} else {
-			errors.put("f1","入学年度とクラスと科目と回数のすべてを入力してください");
-			req.setAttribute("errors", errors);
 		}
 		// セレクトボックスに使うデータ
 		// ログインユーザの学校コードをもとにクラス番号の一覧を取得
