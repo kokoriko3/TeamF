@@ -39,8 +39,8 @@
 						<label class="form-label" for="subject-f3-select">科目</label>
 						<select class="form-select" id="subject-f3-select" name="f3">
 							<option value="0">--------</option>
-							<c:forEach var="string" items="${subject_string_set }">
-								<option value="${string }" <c:if test="${string==f3 }">selected</c:if>>${string}</option>
+							<c:forEach var="subject" items="${subject_set }">
+								<option value="${subject.cd }" <c:if test="${subject.cd==f3 }">selected</c:if>>${subject.name}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -63,13 +63,12 @@
 					<div class="col-2 text-center p-4">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
-					<div class="mt-2 text-warning">${errors.get("f1") }</div>
 				</div>
 			</form>
 			</div>
 			<c:choose>
-				<c:when test="${subjects.size()>0 }">
-					<div>検索結果:${subjects.size() }件</div>
+				<c:when test="${tesListSub.size()>0 }">
+					<div>検索結果:${tesListSub.size() }件</div>
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>

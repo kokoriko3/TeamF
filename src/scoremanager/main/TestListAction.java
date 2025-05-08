@@ -1,8 +1,6 @@
 package scoremanager.main;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -38,20 +36,12 @@ public class TestListAction extends Action {
 
 
 		List<String> classea = cNumDao.filter(teacher.getSchool());
-		List<Subject> subjects = subDao.filter(teacher.getSchool());
 
-		// ★ 科目名だけの Set（重複なし）
-		Set<String> subjectNamesSet = new LinkedHashSet<>();
-		for (Subject sub : subjects) {
-		    subjectNamesSet.add(sub.getName());
-		}
 
-		// ★ JSP に渡すために List に変換（順番を保つならこれが無難）
-		List<String> subNames = new ArrayList<>(subjectNamesSet);
-
+		List<Subject> sList = subDao.filter(teacher.getSchool());
 		req.setAttribute("ent_year_set", entYears);
 		req.setAttribute("class_num_set", classea);
-		req.setAttribute("subject_string_set", subNames);
+		req.setAttribute("subject_set", sList);
 
 		req.getRequestDispatcher("test_list.jsp").forward(req,res);
 	}
