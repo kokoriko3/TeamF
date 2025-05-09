@@ -96,7 +96,7 @@
 										<td>
 
 											<input type="number"
-											name="testList[${status.index}].point" class="form-control"
+											name="testList[${status.index}].point" placeholder="0～100の中から入力してください" class="form-control"
 											<c:if  test="${test.point >= 0 }">value ="${test.point }"</c:if> />
 											<c:if test="${test.point  == -2}"><label class="input-label mt-2 text-warning" >0 ~ 100の範囲で入力してください</label></c:if>
 											<input type="hidden" name="testList[${status.index}].student" value="${test.getStudent().getNo()}" />
