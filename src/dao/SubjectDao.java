@@ -21,7 +21,7 @@ public class SubjectDao extends Dao{
 
 		try {
 			// プリペアードステートメントにSQLをセット
-			statement = connection.prepareStatement("select * from subject where cd = ? and school_cd = ?");
+			statement = connection.prepareStatement("select * from subject where cd = ? and school_cd = ? and is_delete = false");
 			// プリペアードステートメントに科目コードと学校コードをバインド
 			statement.setString(1, cd);
 			statement.setString(2, school.getCd());
@@ -75,7 +75,7 @@ public class SubjectDao extends Dao{
 
 		try {
 			// プリペアードステートメントにSQLをセット
-			statement = connection.prepareStatement("select * from subject where school_cd = ? order by cd asc");
+			statement = connection.prepareStatement("select * from subject where school_cd = ? and is_delete = false order by cd asc");
 			// プリペアードステートメントに学校コードをバインド
 			statement.setString(1, school.getCd());
 			// プリペアードステートメントをじっこう
@@ -183,8 +183,7 @@ public class SubjectDao extends Dao{
 
 		try {
 			// プリペアードステートメントにDELETE文をセット
-			statement = connection.prepareStatement(
-				"delete from subject where cd = ? and school_cd = ?");
+			statement = connection.prepareStatement("update subject set is_delete = true where cd=? and school_cd = ?");
 			statement.setString(1, subject.getCd());
 			statement.setString(2, subject.getSchool().getCd());
 
