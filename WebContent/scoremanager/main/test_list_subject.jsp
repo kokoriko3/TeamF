@@ -13,9 +13,9 @@
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧(科目)</h2>
 			<div class="container border mx-3 mb-3 py-2 align-items-center rounded">
 			<form method="get">
-				<div class="row border-bottom" id="filter">
+				<div class="row border-bottom align-items-end" id="filter">
 					<div class="col-2 text-center p-4">
-						<p>科目情報</p>
+						<p class="mb-2">科目情報</p>
 					</div>
 					<div class="col-auto">
 						<label class="form-label" for="subject-f1-select">入学年度</label>
@@ -44,23 +44,23 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-2 text-center p-4">
+					<div class="col-auto d-flex align-items-end">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
 					<div class="mt-2 text-warning">${errors.get("f1") }</div>
 				</div>
 			</form>
 			<form method="get">
-				<div class="row ">
+				<div class="row align-items-end mt-3">
 					<div class="col-2 text-center p-4">
-						<p>学生情報</p>
+						<p class="mb-2">学生情報</p>
 					</div>
 					<div class="col-3">
 						<label class="form-label" for="subject-f3-select">学生番号</label>
 						<input type="text"  class="form-control" maxlength="10" required
 						name="no" placeholder="学生番号を入力してください" value="${no}">
 					</div>
-					<div class="col-2 text-center p-4">
+					<div class="col-auto d-flex align-items-end">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
 				</div>
