@@ -84,8 +84,15 @@
 							<td>${list.classNum}</td>
 							<td>${list.studentNo }</td>
 							<td>${list.studentName}</td>
-							<td>${list.getPoints().get(1)}</td>
-							<td>${list.getPoints().get(2)}</td>
+							<td>${list.getPoints(1)}</td>
+							<td>
+							<c:catch var="e">
+								${list.getPoints(2)}
+							</c:catch>
+							<c:if test="${e != null}">
+								-
+							</c:if>
+							</td>
 						</tr>
 						</c:forEach>
 					</table>

@@ -83,6 +83,11 @@ public class TestListSubjectExecuteAction extends Action {
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
 		req.setAttribute("subject_set", sList);
+
+		// 入力値の保持
+		req.setAttribute("f1", entYear);
+		req.setAttribute("f2", classNum);
+		req.setAttribute("f3", subjectCd);
 		// 「test_list_subject.jsp」にフォワード
 		req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 	}

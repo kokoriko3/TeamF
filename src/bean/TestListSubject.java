@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestListSubject {
@@ -7,7 +8,7 @@ public class TestListSubject {
 	private String studentNo;
 	private String studentName;
 	private String classNum;
-	private Map<Integer,Integer> points;
+	private Map<Integer,Integer> points = new HashMap<>();
 	public int getEntYear() {
 		return entYear;
 	}
@@ -32,10 +33,11 @@ public class TestListSubject {
 	public void setClassNum(String classNum) {
 		this.classNum = classNum;
 	}
-	public Map<Integer, Integer> getPoints() {
-		return points;
+	public String getPoints(int key) {
+		return points.get(key).toString();
 	}
-	public void setPoints(Map<Integer, Integer> points) {
-		this.points = points;
+	public void putPoints(int key, int value) {
+		System.out.println("key:"+key+" vakue:"+value);
+		this.points.put(key, value);
 	}
 }

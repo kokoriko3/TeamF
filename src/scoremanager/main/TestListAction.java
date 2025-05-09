@@ -1,19 +1,16 @@
 package scoremanager.main;
 
-import java.util.Collections;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import dao.SubjectDao;
 import tool.Action;
 
@@ -25,23 +22,23 @@ public class TestListAction extends Action {
 
 		ClassNumDao cNumDao = new ClassNumDao();
 		SubjectDao subDao = new SubjectDao();
-		StudentDao StudentDao = new StudentDao();
 
-		List<Student> students = StudentDao.filter(teacher.getSchool(), true); // 例：在学中の全生徒
-		Set<Integer> entYears = new TreeSet<>(Collections.reverseOrder()); // 重複なし＆降順にしたいならTreeSet使う
-
-		for (Student stu : students) {
-			entYears.add(stu.getEntYear());
+		LocalDate todayDate = LocalDate.now(); //LocalDateインスタンスを取得
+		int year = todayDate.getYear(); // 現在の年を取得
+		// リストを初期化
+		List<Integer> entYearSet = new ArrayList<>();
+		// 10年前から1年後mでリストに追加
+		for (int i = year - 10;i < year + 1; i ++){
+			entYearSet.add(i);
 		}
-
 
 		List<String> classea = cNumDao.filter(teacher.getSchool());
 
 
-		List<Subject> sList = subDao.filter(teacher.getSchool());
-		req.setAttribute("ent_year_set", entYears);
+		List<Subject> subList = subDao.filter(teacher.getSchool());
+		req.setAttribute("ent_year_set", entYearSet);
 		req.setAttribute("class_num_set", classea);
-		req.setAttribute("subject_set", sList);
+		req.setAttribute("subject_set", subList);
 
 		req.getRequestDispatcher("test_list.jsp").forward(req,res);
 	}
