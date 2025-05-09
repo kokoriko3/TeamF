@@ -29,7 +29,7 @@ ${param.scripts}
 				<%-- ログイン済みの場合 --%>
 				<c:when test="${user.isAuthenticated()}">
 				<h1>ログイン</h1>
-					<nav class="col-3" style="height:40rem;">
+					<nav class="col-md-3" >
 						<c:import url="/common/navigation.jsp" />
 					</nav>
 					<main class="col-9 border-start"> ${param.content} </main>
