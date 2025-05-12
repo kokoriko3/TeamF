@@ -9,9 +9,9 @@
 			<div class="row mx-5 mb-1 align-items-center">
 				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">成績情報変更</h2>
 				<p class="mb-3 bg-success text-white py-2 px-4 text-center">変更が完了しました</p>
-				<div class="col-3 text-center">
-					<a href="TestRegist.action">戻る</a>
-					<a class="btn btn-link" href="TestList.action">成績一覧</a>
+				<div class="col-3">
+					<a class="col-auto m-4" href="TestRegist.action">戻る</a>
+					<a class="col-auto " href="TestList.action">成績一覧</a>
 				</div>
 			</div>
 		</section>

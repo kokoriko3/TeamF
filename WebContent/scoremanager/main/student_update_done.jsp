@@ -14,7 +14,6 @@
 					class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">学生情報変更</h2>
 				<p class="mb-3 bg-green py-2 px-4 text-center"> 変更が完了しました</p>
 				<div class="col-3">
-					<a class="col-auto m-4" href="StudentCreate.action">戻る</a>
 					<a class="col-auto" href="StudentList.action">学生一覧</a>
 			</div>
 			</div>

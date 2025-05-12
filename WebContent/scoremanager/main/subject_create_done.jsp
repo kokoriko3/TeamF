@@ -14,8 +14,8 @@
 					class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">科目情報登録</h2>
 				<p class="mb-3 bg-green py-2 px-4 text-center">登録が完了しました</p>
 				<div class="col-3">
-					<a class="col-auto m-4" href="SubjectCreate.action">戻る</a>
-					<a class="col-auto" href="SubjectList.action">科目一覧</a>
+					<a class="col-md m-4" href="SubjectCreate.action">戻る</a>
+					<a class="col-md" href="SubjectList.action">科目一覧</a>
 
 			</div>
 			</div>

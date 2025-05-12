@@ -16,7 +16,7 @@
 					id="filter">
 
 					<!-- 入学年度 -->
-					<div class="col-2">
+					<div class="col-md-2">
 						<label class="form-label" for="test-f1-select">入学年度</label> <select
 							class="form-select" id="test-f1-select" name="f1">
 							<option value="0">--------</option>
@@ -28,7 +28,7 @@
 					</div>
 
 					<!-- クラス -->
-					<div class="col-2">
+					<div class="col-md-2">
 						<label class="form-label" for="test-f2-select">クラス</label> <select
 							class="form-select" id="test-f2-select" name="f2">
 							<option value="0">--------</option>
@@ -39,7 +39,7 @@
 					</div>
 
 					<!-- 科目 -->
-					<div class="col-3">
+					<div class="col-md-3">
 						<label class="form-label" for="test-f3-select">科目</label> <select
 							class="form-select" id="test-f3-select" name="f3">
 							<option value="0">--------</option>
@@ -51,7 +51,7 @@
 					</div>
 
 					<!-- 回数（固定1〜5） -->
-					<div class="col-2">
+					<div class="col-md-2">
 						<label class="form-label" for="test-f4-select">回数</label> <select
 							class="form-select" id="test-f4-select" name="f4">
 							<option value="0">--------</option>
@@ -62,7 +62,7 @@
 					</div>
 
 					<!-- 検索ボタン -->
-					<div class="col-2 text-center mt-3">
+					<div class="col-md-2 text-center mt-3">
 						<button type="submit" class="btn btn-secondary">検索</button>
 					</div>
 					<div class="mt-2 text-warning">${errors.get("f1") }</div>
