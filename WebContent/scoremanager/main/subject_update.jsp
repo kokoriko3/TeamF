@@ -26,11 +26,13 @@
 				</div>
 
 				<%-- 送信ボタン --%>
-				<div class="col-2 mb-4 text-center">
+				<div class="col-1 mb-2 text-center">
 					<button type="submit" class="btn btn-primary">変更</button>
 				</div>
 
+				<div class="col-1 mx-2">
 				<a href="SubjectList.action">戻る</a>
+				</div>
 				<div class="mt-2 text-warning">${errors.get("f1") }</div>
 			</form>
 		</section>
