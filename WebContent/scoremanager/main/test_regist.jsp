@@ -62,7 +62,7 @@
 					</div>
 
 					<!-- 検索ボタン -->
-					<div class="col-2 text-center mt-3">
+					<div class="col-2 text-center mt-4">
 						<button type="submit" class="btn btn-secondary">検索</button>
 					</div>
 					<div class="mt-2 text-warning">${errors.get("f1") }</div>

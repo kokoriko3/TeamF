@@ -15,12 +15,9 @@
 				<p class="mb-3 bg-success text-white py-2 px-4 text-center">
 					科目情報の変更が完了しました
 				</p>
-				<div class="col-3 text-center">
-					<a class="btn btn-outline-primary m-2" href="SubjectUpdate.action?code=${subject.getCode()}">
-						戻る
-					</a>
-					<a class="btn btn-primary m-2" href="SubjectList.action">
-						科目一覧へ
+				<div class="col-3">
+					<a href="SubjectList.action">
+						科目一覧
 					</a>
 				</div>
 			</div>
