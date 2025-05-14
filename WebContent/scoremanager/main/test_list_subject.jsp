@@ -41,7 +41,7 @@
                             <select class="form-select" id="subject-f3-select" name="f3">
                                 <option value="0">--------</option>
                                 <c:forEach var="subject" items="${subject_set}">
-                                    <option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
+                                    <option value="${subject.cd}" <c:if test="${subject.name==f3}">selected</c:if>>${subject.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -72,7 +72,7 @@
             </div>
 			<c:choose>
 				<c:when test="${tesListSub.size()>0 }">
-					<div>検索結果:${tesListSub.size() }件</div>
+					<div>科目: ${f3}</div>
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>

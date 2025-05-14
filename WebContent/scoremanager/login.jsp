@@ -44,7 +44,7 @@
 					</div>
 					<div class="col-3 form-check py-2 mx-auto">
 						<input class="form-check-input" type="checkbox" name="chk_d_ps"
-							id="showPassword" checked>
+							id="showPassword">
 							<label class="form-check-label" for="showPassword">パスワードを表示</label>
 					</div>
 					<div class="d-grid gap-2 col-6 mx-auto mb-3">

@@ -99,7 +99,7 @@ public class TestListStudentExecuteAction extends Action {
 		req.setAttribute("class_num_set", classea);
 
 		// 入力値の保持
-		req.setAttribute("no", studentNo);
+		req.setAttribute("student", student);
 
         // 表示JSPへ遷移
         req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
