@@ -32,11 +32,11 @@ ${param.scripts}
 					<nav class="col-md-3" >
 						<c:import url="/common/navigation.jsp" />
 					</nav>
-					<main class="col-9 border-start"> ${param.content} </main>
+					<main class="col-md-9 border-start"> ${param.content} </main>
 				</c:when>
 				<%-- 未ログインの場合 --%>
 				<c:otherwise>
-					<main class="col-8"> ${param.content} </main>
+					<main class="col-md-8"> ${param.content} </main>
 				</c:otherwise>
 			</c:choose>
 		</div>

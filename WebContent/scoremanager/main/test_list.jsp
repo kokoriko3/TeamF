@@ -13,10 +13,10 @@
                 <!-- 科目情報検索フォーム -->
                 <form method="get" action="TestListSubjectExecute.action">
                     <div class="row border-bottom align-items-end" id="filter">
-                        <div class="col-2 text-center p-4">
+                        <div class="col-md-2 text-center mb-3">
                             <p class="mb-2">科目情報</p>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-auto mb-2">
                             <label class="form-label" for="subject-f1-select">入学年度</label>
                             <select class="form-select" id="subject-f1-select" name="f1">
                                 <option value="0">--------</option>
@@ -25,7 +25,7 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-auto mb-2">
                             <label class="form-label" for="student-f2-select">クラス</label>
                             <select class="form-select" id="student-f2-select" name="f2">
                                 <option value="0">--------</option>
@@ -34,7 +34,7 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-4 mb-2">
                             <label class="form-label" for="subject-f3-select">科目</label>
                             <select class="form-select" id="subject-f3-select" name="f3">
                                 <option value="0">--------</option>
@@ -43,7 +43,7 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="col-auto d-flex align-items-end">
+                        <div class="col-md-auto mb-2 d-flex align-items-end">
                             <button class="btn btn-secondary" id="filter-button" type="submit">検索</button>
                         </div>
                         <div class="mt-2 text-warning">${errors.get("f1")}</div>
@@ -53,15 +53,15 @@
                 <!-- 学生番号検索フォーム -->
                 <form method="get" action="TestListStudentExecute.action">
                     <div class="row align-items-end mt-3">
-                        <div class="col-2 text-center p-4">
+                        <div class="col-md-2 text-center mb-3">
                             <p class="mb-2">学生情報</p>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-2">
                             <label class="form-label" for="student-no">学生番号</label>
                             <input type="text" class="form-control" maxlength="10" required
                                    id="student-no" name="no" placeholder="学生番号を入力してください" value="${no}">
                         </div>
-                        <div class="col-auto d-flex align-items-end">
+                        <div class="col-md-auto mb-2 d-flex align-items-end">
                             <button class="btn btn-secondary" type="submit">検索</button>
                         </div>
                         <div class="mt-2 text-warning">${errors.get("f1")}</div>

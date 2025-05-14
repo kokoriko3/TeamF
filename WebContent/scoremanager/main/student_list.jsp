@@ -16,7 +16,7 @@
 			</div>
 			<form method="get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
-					<div class="col-4">
+					<div class="col-md-4">
 						<label class="form-label" for="subject-f1-select">入学年度</label>
 						<select class="form-select" id="subject-f1-select" name="f1">
 							<option value="0">--------</option>
@@ -25,7 +25,7 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-4">
+					<div class="col-md-4">
 						<label class="form-label" for="student-f2-select">クラス</label>
 						<select class="form-select" id="student-f2-select" name="f2">
 							<option value="0">--------</option>
@@ -34,13 +34,13 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-2 form-check text-center">
+					<div class="col-md-2 form-check text-center">
 						<label class="form-check-label" for="student-f3-check">在学中
 							<input class="form-check-input" type="checkbox" id="student-f3-check" name="f3" value="t"
 							<c:if test="${!empty f3}">checked</c:if>/>
 						</label>
 					</div>
-					<div class="col-2 text-center">
+					<div class="col-md-2 text-center">
 						<button class="btn btn-secondary" id="filter-button">絞込み</button>
 					</div>
 					<div class="mt-2 text-warning">${errors.get("f1") }</div>
@@ -49,6 +49,7 @@
 			<c:choose>
 				<c:when test="${students.size()>0 }">
 					<div>検索結果:${students.size() }件</div>
+					<div class="table-responsive">
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>
@@ -80,6 +81,7 @@
 						</tr>
 						</c:forEach>
 					</table>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<div>学生情報が存在しませんでした</div>

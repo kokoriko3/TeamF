@@ -22,7 +22,7 @@
 						<input type="text"  class="form-control" maxlength="30" required
 						name="name" placeholder="科目名を入力してください" value="${name}">
 					</div>
-					<div class="col-2 mb-4 text-center">
+					<div class="col-md-2 mb-4 ">
 						<button type="submit" class="btn btn-secondary" id="filter-button">登録</button>
 					</div>
 					<a href="SubjectList.action">戻る</a>

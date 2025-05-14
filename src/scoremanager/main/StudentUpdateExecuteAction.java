@@ -28,9 +28,9 @@ public class StudentUpdateExecuteAction extends Action{
 		classNum = req.getParameter("class_num");
 		isAttendStr = req.getParameter("isAttend");
 		// 受け取ったデータをコンソールに表示
-		System.out.println("入力された値:entYear-"+entYear+" :no-"+no+ " :name-"+name+" :classNum-"+classNum+"isAttend:"+isAttend);
+		System.out.println("入力された値:entYear-"+entYear+" :no-"+no+ " :name-"+name+" :classNum-"+classNum+" isAttend:"+isAttendStr);
 		// isAttendをbooleanにする
-		if (isAttendStr.equals("t")) {
+		if (isAttendStr != null) {
 			isAttend = true;
 		}
 
