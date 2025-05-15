@@ -5,28 +5,17 @@
 	<c:param name="title">
         得点管理システム
     </c:param>
-
-
 	<c:param name="content">
 		<section class="me-4">
-			<div class="row mx-1 mb-1  align-items-center " id="filter">
+			<div class="row mx-5 mb-1  align-items-center " id="filter">
 				<h2
 					class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">学生情報登録</h2>
-<<<<<<< HEAD
 				<p class="mb-3 bg-success bg-opacity-50 py-2 px-4 text-center">登録が完了しました</p>
 				<div class="col-3">
 					<a class="col-auto m-4 " href="StudentCreate.action">戻る</a>
 					<a class="col-auto" href="StudentList.action">学生一覧</a>
 				</div>
-=======
-				<p class="mb-3 bg-green py-2 px-4 text-center">登録が完了しました</p>
-				<div class="col-md-3">
-					<a class=" m-4" href="StudentCreate.action">戻る</a>
-					<a class="" href="StudentList.action">学生一覧</a>
-			</div>
->>>>>>> branch 'master' of https://github.com/kokoriko3/TeamF.git
 			</div>
 		</section>
 	</c:param>
-
 </c:import>
