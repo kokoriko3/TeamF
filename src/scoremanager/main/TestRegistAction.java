@@ -25,7 +25,9 @@ public class TestRegistAction extends Action{
 		// TODO 自動生成されたメソッド・スタブ
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
-
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 		ClassNumDao cNumDao = new ClassNumDao(); //クラス番号Dao
 		SubjectDao sDao = new SubjectDao(); // 科目dao
 		TestDao tDao = new TestDao(); // 得点dao
@@ -93,5 +95,6 @@ public class TestRegistAction extends Action{
 		req.setAttribute("list", tList);
 
 		req.getRequestDispatcher("test_regist.jsp").forward(req,res);
+		}
 	}
 }

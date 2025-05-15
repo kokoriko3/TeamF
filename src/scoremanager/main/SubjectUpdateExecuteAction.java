@@ -18,7 +18,9 @@ public class SubjectUpdateExecuteAction extends Action {
         // ログインユーザーから学校情報を取得
         HttpSession session = req.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
-
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
         // パラメータ取得
         String cd = req.getParameter("cd");
         String name = req.getParameter("name");
@@ -46,6 +48,7 @@ public class SubjectUpdateExecuteAction extends Action {
         } else {
             req.setAttribute("error", "更新に失敗しました");
             req.getRequestDispatcher("subject_update.jsp").forward(req, res);
+        }
         }
     }
 }

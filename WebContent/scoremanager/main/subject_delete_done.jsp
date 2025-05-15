@@ -10,14 +10,12 @@
                 <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">
                     科目情報削除
                 </h2>
-                <p class="mb-3 bg-danger text-white py-2 px-4 text-center">
-                    科目の削除が完了しました
-                </p>
-                <div class="col-3 text-center">
-                    <a class="btn btn-primary m-2" href="SubjectList.action">
-                        科目一覧へ
-                    </a>
-                </div>
+                <p class="mb-3 bg-success bg-opacity-50 py-2 px-4 text-center">科目を削除しましたしました</p>
+                <div class="col-3">
+					<a href="SubjectList.action">
+						科目一覧
+					</a>
+				</div>
             </div>
         </section>
     </c:param>

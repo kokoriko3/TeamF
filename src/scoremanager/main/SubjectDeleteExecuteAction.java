@@ -17,6 +17,9 @@ public class SubjectDeleteExecuteAction extends Action {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 
+		if (teacher == null) {
+			response.sendRedirect("../Login.action");
+		} else {
         String cd = request.getParameter("cd"); // 削除対象の科目コードを取得
 
         // 学校情報の取得（教員に紐づく学校）
@@ -29,7 +32,8 @@ public class SubjectDeleteExecuteAction extends Action {
             subjectDao.delete(subject);
         }
 
-        // 削除後、科目一覧へリダイレクト
-        response.sendRedirect("SubjectList.action");
+        // 削除後、削除完了ページにフォワード
+        request.getRequestDispatcher("subject_delete_done.jsp").forward(request, response);
+		}
     }
 }

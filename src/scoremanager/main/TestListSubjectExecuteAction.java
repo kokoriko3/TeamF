@@ -25,6 +25,9 @@ public class TestListSubjectExecuteAction extends Action {
 		// ログイン中の教員の情報を取得
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 
 		// 入力された「f1」「f2」「f3」を取得
 		String entYearStr = "";
@@ -87,8 +90,9 @@ public class TestListSubjectExecuteAction extends Action {
 		// 入力値の保持
 		req.setAttribute("f1", entYear);
 		req.setAttribute("f2", classNum);
-		req.setAttribute("f3", subjectCd);
+		req.setAttribute("f3", subject.getName());
 		// 「test_list_subject.jsp」にフォワード
 		req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
+		}
 	}
 }

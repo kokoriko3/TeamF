@@ -25,7 +25,9 @@ public class StudentListAction extends Action {
 
 		HttpSession session = request.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
-
+		if (teacher == null) {
+			response.sendRedirect("../Login.action");
+		} else {
 		String entYearStr=""; // 入力された入学年度
 		String classNum=""; // 入力されたクラス番号
 		String isAttendStr=""; // 入力された在学フラグ
@@ -97,5 +99,6 @@ public class StudentListAction extends Action {
 
 		request.getRequestDispatcher("student_list.jsp").forward(request, response);
 
+	}
 	}
 }

@@ -25,7 +25,9 @@ public class TestRegistExecuteAction extends Action{
 		// TODO 自動生成されたメソッド・スタブ
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
-
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 		String pointStr;
 		int point;
 		int no; // 回数
@@ -132,6 +134,7 @@ public class TestRegistExecuteAction extends Action{
 		 System.out.println(succese);
 
 		req.getRequestDispatcher("test_update_done.jsp").forward(req, res);
+		}
 		}
 	}
 

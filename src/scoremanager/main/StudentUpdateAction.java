@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Student;
+import bean.Teacher;
 import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
@@ -15,6 +17,11 @@ public class StudentUpdateAction extends Action{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+		HttpSession session = req.getSession();
+		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 		// 変数の定義
 		String no = ""; // 学生番号
 		StudentDao sDao =new StudentDao();
@@ -36,7 +43,8 @@ public class StudentUpdateAction extends Action{
 		req.setAttribute("student", student);
 		req.setAttribute("class_num_set", list);
 
-		req.getRequestDispatcher("student_update.jsp").forward(req, res);;
+		req.getRequestDispatcher("student_update.jsp").forward(req, res);
+	}
 	}
 
 }

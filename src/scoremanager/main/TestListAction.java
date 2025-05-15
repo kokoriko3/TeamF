@@ -19,6 +19,9 @@ public class TestListAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 
 		ClassNumDao cNumDao = new ClassNumDao();
 		SubjectDao subDao = new SubjectDao();
@@ -41,6 +44,7 @@ public class TestListAction extends Action {
 		req.setAttribute("subject_set", subList);
 
 		req.getRequestDispatcher("test_list.jsp").forward(req,res);
+		}
 	}
 
 }

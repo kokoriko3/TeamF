@@ -2,8 +2,10 @@ package scoremanager.main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Student;
+import bean.Teacher;
 import dao.StudentDao;
 import tool.Action;
 
@@ -12,7 +14,11 @@ public class StudentUpdateExecuteAction extends Action{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-
+		HttpSession session = req.getSession();
+		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 		// 変数の定義
 		String entYear = "";
 		String no = "";
@@ -49,6 +55,7 @@ public class StudentUpdateExecuteAction extends Action{
 
 		// 画面遷移
 		req.getRequestDispatcher("student_update_done.jsp").forward(req, res);
+	}
 	}
 
 }

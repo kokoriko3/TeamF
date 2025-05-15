@@ -65,7 +65,7 @@
                         <div class="col-md-3 mb-2">
                             <label class="form-label" for="student-no">学生番号</label>
                             <input type="text" class="form-control" maxlength="10" required
-                                   id="student-no" name="no" placeholder="学生番号を入力してください" value="${no}">
+                                   id="student-no" name="no" placeholder="学生番号を入力してください" value="${student.no}">
                         </div>
                         <div class="col-md-auto mb-2 d-flex align-items-end">
                             <button class="btn btn-secondary" type="submit">検索</button>
@@ -76,7 +76,7 @@
             </div>
 			<c:choose>
 				<c:when test="${students.size()>0 }">
-					<div>検索結果:${students.size() }件</div>
+					<div>氏名:${student.name }(${student.no })</div>
 					<table class="table table-hover">
 						<tr>
 							<th>科目名</th>

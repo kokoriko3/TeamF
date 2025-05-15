@@ -21,7 +21,7 @@ public class SubjectDao extends Dao{
 
 		try {
 			// プリペアードステートメントにSQLをセット
-			statement = connection.prepareStatement("select * from subject where cd = ? and school_cd = ? and is_delete = false");
+			statement = connection.prepareStatement("select * from subject where cd = ? and school_cd = ?");
 			// プリペアードステートメントに科目コードと学校コードをバインド
 			statement.setString(1, cd);
 			statement.setString(2, school.getCd());

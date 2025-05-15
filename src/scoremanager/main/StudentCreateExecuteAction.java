@@ -16,6 +16,9 @@ public class StudentCreateExecuteAction extends Action{
 		// TODO 自動生成されたメソッド・スタブ
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 
 		// 変数を定義
 		String entYearStr = "";
@@ -70,6 +73,6 @@ public class StudentCreateExecuteAction extends Action{
 
 			req.getRequestDispatcher("student_create_done.jsp").forward(req, res);;
 		}
+		}
 	}
-
 }

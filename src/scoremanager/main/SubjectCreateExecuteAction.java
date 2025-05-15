@@ -16,6 +16,9 @@ public class SubjectCreateExecuteAction extends Action {
 		// ログイン中の教員の情報を取得
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 
 		// 入力された「no」「name」を取得
 		String no = "";
@@ -66,6 +69,6 @@ public class SubjectCreateExecuteAction extends Action {
         if (result) {
         	req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
         }
-
+		}
 	}
 }
