@@ -112,6 +112,7 @@
 						</div>
 					</form>
 				</c:when>
+
 				<c:otherwise>
 					<div>成績情報が存在していません</div>
 				</c:otherwise>

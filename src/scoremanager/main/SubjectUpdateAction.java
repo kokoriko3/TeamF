@@ -22,6 +22,9 @@ public class SubjectUpdateAction extends Action {
         HttpSession session = req.getSession();
 
         Teacher teacher = (Teacher) session.getAttribute("user");
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
 
         // 学校情報を取得
 
@@ -46,6 +49,7 @@ public class SubjectUpdateAction extends Action {
         // 遷移
 
         req.getRequestDispatcher("subject_update.jsp").forward(req, res);
+		}
 
     }
 

@@ -15,8 +15,11 @@ public class SubjectDeleteAction extends Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        HttpSession session = request.getSession();
-        Teacher teacher = (Teacher) session.getAttribute("user");
+		HttpSession session = request.getSession();
+		Teacher teacher = (Teacher)session.getAttribute("user");
+		if (teacher == null) {
+			response.sendRedirect("../Login.action");
+		} else {
 
         String cd = request.getParameter("cd");
 
@@ -28,5 +31,6 @@ public class SubjectDeleteAction extends Action {
         // 科目情報をリクエストに渡して、確認画面へ
         request.setAttribute("subject", subject);
         request.getRequestDispatcher("/scoremanager/main/subject_delete.jsp").forward(request, response);
+    }
     }
 }

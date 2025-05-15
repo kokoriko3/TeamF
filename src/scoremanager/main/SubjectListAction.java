@@ -20,7 +20,9 @@ public class SubjectListAction extends Action {
 		// ログイン中の教員の情報を取得
 		HttpSession session = request.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
-
+		if (teacher == null) {
+			response.sendRedirect("../Login.action");
+		} else {
 		// 「SubjectDao」を生成
 		SubjectDao subjectDao = new SubjectDao();
 
@@ -35,4 +37,5 @@ public class SubjectListAction extends Action {
 		// 「subject_list.jsp」にフォワード
 		request.getRequestDispatcher("subject_list.jsp").forward(request, response);
 	}
+}
 }

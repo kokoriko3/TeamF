@@ -19,6 +19,11 @@ public class StudentCreateAction extends Action{
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
+		System.out.println("session:" +teacher);
+		if (teacher == null) {
+			res.sendRedirect("../Login.action");
+		} else {
+
 		ClassNumDao cNumDao = new ClassNumDao();
 		LocalDate todayDate = LocalDate.now();
 		int year = todayDate.getYear(); // 現在の年を取得
@@ -39,5 +44,6 @@ public class StudentCreateAction extends Action{
 		req.setAttribute("ent_year_set", entYearSet);
 
 		req.getRequestDispatcher("student_create.jsp").forward(req, res);
+		}
 	}
 }
