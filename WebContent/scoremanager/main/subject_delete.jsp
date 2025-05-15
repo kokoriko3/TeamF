@@ -10,20 +10,22 @@
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
 
 
-            <p class="text-danger px-4">
+            <p class=" px-4">
                 「${subject.getName()}（${subject.getCd()}）」を削除してよろしいですか？
             </p>
 
             <!-- 削除フォーム -->
-            <form method="post" action="SubjectDeleteExecute.action" class="px-4">
+            <form method="post" action="SubjectDeleteExecute.action" class="px-4 mb-5">
                 <input type="hidden" name="cd" value="${subject.getCd()}">
 
                 <!-- ③ 削除ボタン -->
                 <button type="submit" class="btn btn-danger me-3">削除</button>
 
-                <!-- ④ 戻るリンク -->
-                <a href="SubjectList.action" class="btn btn-link">戻る</a>
             </form>
+             <!-- ④ 戻るリンク -->
+             <p class= "px-2">
+             <a href="SubjectList.action" class="btn btn-link">戻る</a>
+             </p>
         </section>
     </c:param>
 </c:import>
