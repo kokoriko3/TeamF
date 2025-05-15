@@ -29,7 +29,7 @@ public class SubjectDeleteExecuteAction extends Action {
             subjectDao.delete(subject);
         }
 
-        // 削除後、科目一覧へリダイレクト
-        response.sendRedirect("SubjectList.action");
+        // 削除後、削除完了ページにフォワード
+        request.getRequestDispatcher("subject_delete_done.jsp").forward(request, response);
     }
 }
