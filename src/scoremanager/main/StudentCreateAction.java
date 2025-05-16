@@ -38,10 +38,11 @@ public class StudentCreateAction extends Action{
 		for (int i = year - 10;i < year + 10; i ++){
 			entYearSet.add(i);
 		}
-
 		// リクエストにデータをセット
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
+		
+		
 
 		req.getRequestDispatcher("student_create.jsp").forward(req, res);
 		}

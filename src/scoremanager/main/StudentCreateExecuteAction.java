@@ -1,78 +1,80 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 
-public class StudentCreateExecuteAction extends Action{
+public class StudentCreateExecuteAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		HttpSession session = req.getSession();
-		Teacher teacher = (Teacher)session.getAttribute("user");
-		if (teacher == null) {
-			res.sendRedirect("../Login.action");
-		} else {
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        HttpSession session = req.getSession();
+        Teacher teacher = (Teacher) session.getAttribute("user");
 
-		// 変数を定義
-		String entYearStr = "";
-		String noStr = "";
-		String name = "";
-		String classNumStr = "";
-		// studentDaoをインスタンス科
-		StudentDao sDao = new StudentDao();
+        if (teacher == null) {
+            res.sendRedirect("../Login.action");
+            return;
+        }
 
-		// リクエストされたデータを取り出す
-		entYearStr = req.getParameter("ent_year");
-		noStr = req.getParameter("no");
-		name = req.getParameter("name");
-		classNumStr = req.getParameter("class_num");
+        // リクエストパラメータ取得
+        String entYearStr = req.getParameter("ent_year");
+        String noStr = req.getParameter("no");
+        String name = req.getParameter("name");
+        String classNumStr = req.getParameter("class_num");
 
-		System.out.println("入力された値:entYear-"+entYearStr+" :noStr-"+noStr+ " :name-"+name+" :classNum-"+classNumStr);
+        // Dao 初期化
+        StudentDao sDao = new StudentDao();
+        ClassNumDao cDao = new ClassNumDao();
 
+        // 入学年度・クラスリストの再取得（エラー時用）
+        List<String> classNumSet = cDao.filter(teacher.getSchool());
+        List<Integer> entYearSet = new ArrayList<>();
+        int year = LocalDate.now().getYear();
+        for (int i = year - 10; i < year + 10; i++) {
+            entYearSet.add(i);
+        }
 
-		// 学生番号が存在しているか調べる
-		Student getStudent = new Student();
-		// 空の場合はエラーメッセージを定義してフォワード
-		getStudent  = sDao.get(noStr);
-		System.out.println(getStudent);
-		// 1つでも空のデータがある場合はcreate.jspを表示
-		if (entYearStr.equals("0")) {
-			// エラーメッセージ
-			req.setAttribute("errorEntYear", "入学年度を選択してください");
-			// 入力した文字を出す
-			req.setAttribute("no", noStr);
-			req.setAttribute("name", name);
-			req.getRequestDispatcher("student_create.jsp").forward(req, res);
+        // バリデーション
+        if (entYearStr.equals("0")) {
+            req.setAttribute("errorEntYear", "入学年度を選択してください");
+            req.setAttribute("no", noStr);
+            req.setAttribute("name", name);
+            req.setAttribute("class_num_set", classNumSet);
+            req.setAttribute("ent_year_set", entYearSet);
+            req.getRequestDispatcher("student_create.jsp").forward(req, res);
+            return;
+        }
 
-		}
-		else if(getStudent != null){
-			req.setAttribute("errorNo", "学生番号が重複しています");
-			req.getRequestDispatcher("student_create.jsp").forward(req, res);
+        if (sDao.get(noStr) != null) {
+            req.setAttribute("errorNo", "学生番号が重複しています");
+            req.setAttribute("no", noStr);
+            req.setAttribute("name", name);
+            req.setAttribute("class_num_set", classNumSet);
+            req.setAttribute("ent_year_set", entYearSet);
+            req.getRequestDispatcher("student_create.jsp").forward(req, res);
+            return;
+        }
 
-		}
-		else {
-			Student student = new Student();
+        // 登録処理
+        Student student = new Student();
+        student.setNo(noStr);
+        student.setName(name);
+        student.setEntYear(Integer.parseInt(entYearStr));
+        student.setClassNum(classNumStr);
+        student.setAttend(true);
+        student.setSchool(teacher.getSchool());
 
-			// 取り出したデータをstudentにセットする
-			student.setNo(noStr);
-			student.setName(name);
-			student.setEntYear(Integer.parseInt(entYearStr));
-			student.setClassNum(classNumStr);
-			student.setAttend(true);
-			student.setSchool(teacher.getSchool());
-
-			// データベースに情報を保存
-			sDao.save(student);
-
-			req.getRequestDispatcher("student_create_done.jsp").forward(req, res);;
-		}
-		}
-	}
+        sDao.save(student);
+        req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
+    }
 }
