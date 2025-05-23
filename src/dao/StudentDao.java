@@ -67,6 +67,7 @@ public class StudentDao extends Dao{
 		return student;
 	}
 
+
 	private List<Student> postFilter(ResultSet rSet,School school) throws Exception {
 		// リストを初期化
 		List<Student> list = new ArrayList<>();
@@ -120,7 +121,7 @@ public class StudentDao extends Dao{
 			statement.setInt(2, entYear);
 			//プリペアードステートメントにクラス番号をバインド
 			statement.setString(3, classNum);
-			// プリペアードステートメントをじっこう
+			// プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 			// リストへの格納処理を実行
 			list = postFilter(rSet, school);
@@ -320,5 +321,57 @@ public class StudentDao extends Dao{
 			// 実行件数が0件の場合
 			return false;
 		}
+	}
+
+	public List<Student> nameFillter(String name,School school) throws Exception {
+		// リストを初期化
+		List<Student> list = new ArrayList<>();
+		// コネクションを確率
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+		// SQL文のソート
+		String order = " order by no asc";
+
+		// SQL文の在学フラグ条件
+		String conditionIsAttend = "";
+		// 入力された文字が名前に含まれていた場合
+		if () {
+			conditionIsAttend = " and is_attend=true ";
+		}
+
+		try {
+			// プリペアードステートメントにSQLをセット
+			statement = connection.prepareStatement(baseSql + conditionIsAttend + order);
+			// プリペアードステートメントに学校コードをバインド
+			statement.setString(1, school.getCd());
+			// プリペアードステートメントをじっこう
+			rSet = statement.executeQuery();
+			// リストへの格納処理を実行
+			list = postFilter(rSet, school);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+
+		return list;
 	}
 }
