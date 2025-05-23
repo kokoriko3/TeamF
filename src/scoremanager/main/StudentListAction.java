@@ -43,7 +43,7 @@ public class StudentListAction extends Action {
 		entYearStr = request.getParameter("f1");
 		classNum = request.getParameter("f2");
 		isAttendStr = request.getParameter("f3");
-
+		String name=request.getParameter("f4");
 		// 絞り込み用
 		if (entYearStr != null) {
 			/// 数値に変換
@@ -75,11 +75,18 @@ public class StudentListAction extends Action {
 			students = sDao.filter(teacher.getSchool(), entYear, isAttend);
 		} else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
 			//  指定なしの場合
+			if (name !=null && name.equals("0")){
+				students =sDao.nameFillter(name, teacher.getSchool());
+			}
+
+
+
 			// 全学生情報を取得
 			students = sDao.filter(teacher.getSchool(), isAttend);
 		} else {
 			errors.put("f1","クラスを指定する場合は入学年度も指定してください");
 			request.setAttribute("errors", errors);
+
 			// 全学生情報を取得
 			students = sDao.filter(teacher.getSchool(), isAttend);
 		}
