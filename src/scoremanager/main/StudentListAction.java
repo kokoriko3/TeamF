@@ -31,6 +31,7 @@ public class StudentListAction extends Action {
 		String entYearStr=""; // 入力された入学年度
 		String classNum=""; // 入力されたクラス番号
 		String isAttendStr=""; // 入力された在学フラグ
+		String name = "";
 		int entYear = 0;  // 入学年度
 		boolean isAttend = false; // 在学フラグ
 		List<Student> students = null; // 学生リスト
@@ -43,7 +44,7 @@ public class StudentListAction extends Action {
 		entYearStr = request.getParameter("f1");
 		classNum = request.getParameter("f2");
 		isAttendStr = request.getParameter("f3");
-
+		name=request.getParameter("f4");
 		// 絞り込み用
 		if (entYearStr != null) {
 			/// 数値に変換
@@ -75,11 +76,17 @@ public class StudentListAction extends Action {
 			students = sDao.filter(teacher.getSchool(), entYear, isAttend);
 		} else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
 			//  指定なしの場合
-			// 全学生情報を取得
-			students = sDao.filter(teacher.getSchool(), isAttend);
+			if (name ==null || name.equals("0")){
+				students = sDao.filter(teacher.getSchool(), isAttend);
+			}else {
+				// 全学生情報を取得
+				System.out.println(name);
+				students =sDao.nameFilter(name, teacher.getSchool());
+			}
 		} else {
 			errors.put("f1","クラスを指定する場合は入学年度も指定してください");
 			request.setAttribute("errors", errors);
+
 			// 全学生情報を取得
 			students = sDao.filter(teacher.getSchool(), isAttend);
 		}
@@ -89,6 +96,7 @@ public class StudentListAction extends Action {
 		request.setAttribute("f1", entYear);
 		// リクエストにクラス番号をセット
 		request.setAttribute("f2", classNum);
+		request.setAttribute("f4", name);
 		// 在学フラグが送信されていたヴぁ愛
 
 		// リクエストに学生リストをセット
