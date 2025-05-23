@@ -323,34 +323,22 @@ public class StudentDao extends Dao{
 		}
 	}
 
-	public List<Student> nameFillter(String name,School school) throws Exception {
-		// リストを初期化
-		List<Student> list = new ArrayList<>();
-		// コネクションを確率
-		Connection connection = getConnection();
-		// プリペアードステートメント
-		PreparedStatement statement = null;
-		// リザルトセット
-		ResultSet rSet = null;
-		// SQL文のソート
-		String order = " order by no asc";
+	public List<Student> nameFilter(String name, School school) throws Exception {
+	    List<Student> list = new ArrayList<>();
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet rSet = null;
 
-		// SQL文の在学フラグ条件
-		String conditionIsAttend = "";
-		// 入力された文字が名前に含まれていた場合
-		if () {
-			conditionIsAttend = " and is_attend=true ";
-		}
+	    // SQL文: LIKEを使って名前に部分一致
+	    String sql = baseSql + " and name LIKE ? order by no asc";
 
-		try {
-			// プリペアードステートメントにSQLをセット
-			statement = connection.prepareStatement(baseSql + conditionIsAttend + order);
-			// プリペアードステートメントに学校コードをバインド
-			statement.setString(1, school.getCd());
-			// プリペアードステートメントをじっこう
-			rSet = statement.executeQuery();
-			// リストへの格納処理を実行
-			list = postFilter(rSet, school);
+	    try {
+	        statement = connection.prepareStatement(sql);
+	        statement.setString(1, school.getCd());
+	        statement.setString(2, "%" + name + "%");  // 部分一致
+
+	        rSet = statement.executeQuery();
+	        list = postFilter(rSet, school);
 		} catch (Exception e) {
 			throw e;
 		} finally {
