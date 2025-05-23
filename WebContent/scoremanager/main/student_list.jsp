@@ -46,6 +46,19 @@
 					<div class="mt-2 text-warning">${errors.get("f1") }</div>
 				</div>
 			</form>
+			<form method="get">
+				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+					<div class="col-md-4">
+						<label class="form-label" for="subject-f1-select">名前検索</label>
+						<input type="text" class="form-control" maxlength="15" required
+                                   id="student-no" name="f4" placeholder="学生名を入力してください" value="${f4}">
+					</div>
+					<div class="col-md-2 text-center">
+						<button class="btn btn-secondary" id="filter-button">検索</button>
+					</div>
+					<div class="mt-2 text-warning">${errors.get("f4") }</div>
+				</div>
+			</form>
 			<c:choose>
 				<c:when test="${students.size()>0 }">
 					<div>検索結果:${students.size() }件</div>
