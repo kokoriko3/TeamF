@@ -76,7 +76,7 @@ public class StudentListAction extends Action {
 		} else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
 			//  指定なしの場合
 			if (name !=null && name.equals("0")){
-				students =sDao.nameFillter(name, teacher.getSchool());
+				students =sDao.nameFilter(name, teacher.getSchool());
 			}
 
 
