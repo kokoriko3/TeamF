@@ -116,6 +116,57 @@ public class SubjectDao extends Dao{
 
 	}
 
+	public List<Subject> filter(String subject_cd) throws Exception {
+		// リストを初期化
+		List<Subject> list = new ArrayList<>();
+		// コネクションを確率
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// リザルトセット
+		ResultSet rSet = null;
+
+		try {
+			// プリペアードステートメントにSQLをセット
+			statement = connection.prepareStatement("select * from subject where cd = ? order by cd asc");
+			// プリペアードステートメントに学校コードをバインド
+			statement.setString(1, subject_cd);			// プリペアードステートメントをじっこう
+			rSet = statement.executeQuery();
+			// リザルトセットを全精査
+			while (rSet.next()) {
+				// 科目インスタンスを初期化
+				Subject subject = new Subject();
+				// 科目インスタンスに検索結果をセット
+				subject.setCd(rSet.getString("cd"));
+				subject.setName(rSet.getString("name"));
+				// リストに追加
+				list.add(subject);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+
+		return list;
+
+	}
+
 	public boolean save(Subject subject) throws Exception {
 		// コネクションを確率
 		Connection connection = getConnection();
