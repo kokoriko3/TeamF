@@ -14,7 +14,7 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧(学生)</h2>
             <div class="container border mx-3 mb-3 py-2 align-items-center rounded">
                 <!-- 科目情報検索フォーム -->
                 <form method="get" action="TestListSubjectExecute.action">
@@ -93,6 +93,10 @@
 						</tr>
 						</c:forEach>
 					</table>
+				</c:when>
+				<c:when test="${not empty student}">
+					<div>氏名:${student.name }(${student.no })</div>
+					<div>成績情報が存在しませんでした</div>
 				</c:when>
 				<c:otherwise>
 					<div>学生情報が存在しませんでした</div>

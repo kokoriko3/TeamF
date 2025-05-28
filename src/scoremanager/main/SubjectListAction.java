@@ -26,6 +26,7 @@ public class SubjectListAction extends Action {
 		// 「SubjectDao」を生成
 		SubjectDao subjectDao = new SubjectDao();
 
+
 		// 教員が所属する学校の科目を取得
 		List<Subject> subjects = subjectDao.filter(teacher.getSchool());
 

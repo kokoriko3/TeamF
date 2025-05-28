@@ -64,10 +64,12 @@
                         <div class="col-md-auto mb-2 d-flex align-items-end">
                             <button class="btn btn-secondary" type="submit">検索</button>
                         </div>
-                        <div class="mt-2 text-warning">${errors.get("f1")}</div>
                     </div>
                 </form>
             </div>
+            <label class="text-info">
+            	科目情報を選択またはが学生情報を入力して検索ボタンをクリックしてください
+            </label>
         </section>
     </c:param>
 </c:import>

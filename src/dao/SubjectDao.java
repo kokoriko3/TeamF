@@ -116,7 +116,7 @@ public class SubjectDao extends Dao{
 
 	}
 
-	public List<Subject> filter(String subject_cd) throws Exception {
+	public List<Subject> filter(String subject_cd,School school) throws Exception {
 		// リストを初期化
 		List<Subject> list = new ArrayList<>();
 		// コネクションを確率
@@ -126,11 +126,13 @@ public class SubjectDao extends Dao{
 		// リザルトセット
 		ResultSet rSet = null;
 
+		String cd = "%"+ subject_cd + "%";
 		try {
 			// プリペアードステートメントにSQLをセット
-			statement = connection.prepareStatement("select * from subject where cd = ? order by cd asc");
+			statement = connection.prepareStatement("select * from subject where cd like ? and school_cd = ? and is_delete = false order by cd asc");
 			// プリペアードステートメントに学校コードをバインド
-			statement.setString(1, subject_cd);			// プリペアードステートメントをじっこう
+			statement.setString(1, cd);			// プリペアードステートメントをじっこう
+			statement.setString(2, school.getCd());
 			rSet = statement.executeQuery();
 			// リザルトセットを全精査
 			while (rSet.next()) {
