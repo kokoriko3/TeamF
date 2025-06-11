@@ -23,10 +23,12 @@
                         	<div class="col-md-3 mb-2">
                             	<input type="text" class="form-control" maxlength="10" required
                                 	   id="subject_cd" name="cd" placeholder="科目コード" value="${cd}">
+
                         	</div>
                         	<div class="col-md-auto mb-2 d-flex align-items-end">
                             	<button class="btn btn-secondary" type="submit">検索</button>
                         	</div>
+                        	<label class="mt-2 text-warning">${errorNo }</label>
                         	<div class="mt-2 text-warning">${errors.get("f1")}</div>
                     	</div>
                 	</form>

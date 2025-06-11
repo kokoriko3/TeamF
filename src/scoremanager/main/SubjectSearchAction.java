@@ -22,8 +22,9 @@ public class SubjectSearchAction extends Action {
 
 		cd = req.getParameter("cd");
 
+		System.out.println("cd:"+cd+"lengh"+cd.length());
 		if (cd.length() > 3) {
-			req.setAttribute("errorNo", "科目コードは3文字以内で入力してください");
+			req.setAttribute("errorNo", "科目コードは3文字以下で入力してください");
 			req.setAttribute("cd", cd);
 			req.getRequestDispatcher("subject_list.jsp").forward(req, res);
 			return;
@@ -34,6 +35,7 @@ public class SubjectSearchAction extends Action {
 
 		System.out.println(list);
 
+		req.setAttribute("cd", cd);
 		req.setAttribute("subjects", list);
 		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
 
